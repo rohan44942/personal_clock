@@ -9,11 +9,9 @@ function updateTime() {
     hours = hours ? hours : 12; // the hour '0' should be '12'
     const formattedHours = String(hours).padStart(2, '0');
 
-    const timeString = `${formattedHours}:${minutes}:${seconds}`;
+    const timeString = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
     document.getElementById('time').textContent = timeString;
-    document.getElementById('ampm').textContent = ampm;
     document.getElementById('fullScreenTime').textContent = timeString;
-    document.getElementById('fullScreenAmpm').textContent = ampm;
 }
 
 setInterval(updateTime, 1000);
@@ -33,7 +31,6 @@ function startReverseTimer() {
         const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
         const secs = String(totalSeconds % 60).padStart(2, '0');
         document.getElementById('reverseTime').textContent = `${mins}:${secs}`;
-        document.getElementById('fullScreenReverseTime').textContent = `${mins}:${secs}`;
         totalSeconds--;
     }, 1000);
 }
@@ -51,59 +48,14 @@ function startFocusTimer() {
         const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
         const secs = String(totalSeconds % 60).padStart(2, '0');
         document.getElementById('focusTime').textContent = `${mins}:${secs}`;
-        document.getElementById('fullScreenFocusTime').textContent = `${mins}:${secs}`;
         totalSeconds--;
     }, 1000);
 }
 
 function showFullScreenClock() {
     document.getElementById('fullScreenClock').classList.add('active');
-    keepScreenOn();
 }
 
 function hideFullScreenClock() {
     document.getElementById('fullScreenClock').classList.remove('active');
-    releaseScreenOn();
-}
-
-function showFullScreenReverse() {
-    document.getElementById('fullScreenReverse').classList.add('active');
-    keepScreenOn();
-}
-
-function hideFullScreenReverse() {
-    document.getElementById('fullScreenReverse').classList.remove('active');
-    releaseScreenOn();
-}
-
-function showFullScreenFocus() {
-    document.getElementById('fullScreenFocus').classList.add('active');
-    keepScreenOn();
-}
-
-function hideFullScreenFocus() {
-    document.getElementById('fullScreenFocus').classList.remove('active');
-    releaseScreenOn();
-}
-
-let wakeLock = null;
-
-function keepScreenOn() {
-    if ('wakeLock' in navigator) {
-        navigator.wakeLock.request('screen').then(lock => {
-            wakeLock = lock;
-        }).catch(err => {
-            console.log(`${err.name}, ${err.message}`);
-        });
-    }
-}
-
-function releaseScreenOn() {
-    if (wakeLock !== null) {
-        wakeLock.release().then(() => {
-            wakeLock = null;
-        }).catch(err => {
-            console.log(`${err.name}, ${err.message}`);
-        });
-    }
 }

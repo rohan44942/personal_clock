@@ -9,24 +9,33 @@
 <body>
     <div class="container">
         <div class="clock">
-            <h1 id="time" onclick="showFullScreenClock()">00:00:00 AM</h1>
+            <h1 id="time" onclick="showFullScreenClock()">00:00:00 <span id="ampm">AM</span></h1>
         </div>
         <div class="reverse-timer">
             <h2>Reverse Timer</h2>
             <input type="number" id="reverseMinutes" placeholder="Minutes">
             <input type="number" id="reverseSeconds" placeholder="Seconds">
             <button onclick="startReverseTimer()">Start Reverse Timer</button>
-            <h3 id="reverseTime">00:00</h3>
+            <h3 id="reverseTime" onclick="showFullScreenReverse()">00:00</h3>
         </div>
         <div class="focus-timer">
             <h2>Focus Timer</h2>
             <input type="number" id="focusMinutes" placeholder="Minutes">
             <button onclick="startFocusTimer()">Start Focus Timer</button>
-            <h3 id="focusTime">00:00</h3>
+            <h3 id="focusTime" onclick="showFullScreenFocus()">00:00</h3>
         </div>
     </div>
     <div id="fullScreenClock" class="fullscreen-clock" onclick="hideFullScreenClock()">
-        <h1 id="fullScreenTime">00:00:00 AM</h1>
+        <h1 id="fullScreenTime">00:00:00 <span id="fullScreenAmpm">AM</span></h1>
+        <div class="close-button" onclick="hideFullScreenClock()">&#10005;</div>
+    </div>
+    <div id="fullScreenReverse" class="fullscreen-clock" onclick="hideFullScreenReverse()">
+        <h1 id="fullScreenReverseTime">00:00</h1>
+        <div class="close-button" onclick="hideFullScreenReverse()">&#10005;</div>
+    </div>
+    <div id="fullScreenFocus" class="fullscreen-clock" onclick="hideFullScreenFocus()">
+        <h1 id="fullScreenFocusTime">00:00</h1>
+        <div class="close-button" onclick="hideFullScreenFocus()">&#10005;</div>
     </div>
     <script src="script.js"></script>
 </body>

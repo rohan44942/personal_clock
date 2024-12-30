@@ -9,8 +9,10 @@ body {
 }
 
 .container {
+
   text-align: center;
   border-radius: 1%;
+  
   border-color: black;
 }
 
